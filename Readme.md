@@ -1,33 +1,31 @@
 # PHP Barcode Generator 
-<a href="https://github.com/picqer/php-barcode-generator/actions"><img src="https://github.com/picqer/php-barcode-generator/workflows/phpunit/badge.svg" alt="Build Status"></a>
+
 <a href="https://packagist.org/packages/picqer/php-barcode-generator"><img src="https://img.shields.io/packagist/dt/picqer/php-barcode-generator" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/picqer/php-barcode-generator"><img src="https://img.shields.io/packagist/v/picqer/php-barcode-generator" alt="Latest Stable Version"></a>
 
-This is an easy to use, non-bloated, framework independent, barcode generator in PHP. It uses zero(!) composer dependencies and is only a handful of files. Probably the reason that this is the most downloaded barcode generator for PHP on Packagist. ;)
+Bu, PHP'de kullanımı kolay, şişkin olmayan, çerçeveden bağımsız bir barkod oluşturucudur. Sıfır(!) besteci bağımlılığı kullanır ve yalnızca bir avuç dosyadan oluşur. Muhtemelen bu, Packagist'te PHP için en çok indirilen barkod oluşturucu olmasının nedenidir. ;)
 
-It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standards.
+En çok kullanılan 1D barkod standartlarından SVG, PNG, JPG ve HTML resimleri oluşturur.
 
-## No support for...
-- No support for any **2D** barcodes, like QR codes.
-- We only generate the 'bars' part of a barcode, without text below the barcode. If you want text of the code below the barcode, you could add it later to the output of this package. 
+## ... için destek yok
+- QR kodları gibi herhangi bir **2D** barkod için destek yok.
+- Sadece barkodun 'çubuklar' kısmını, barkodun altında metin olmadan oluşturuyoruz. Barkodun altında kodun metnini istiyorsanız, bunu daha sonra bu paketin çıktısına ekleyebilirsiniz.
 
-## Installation
-Install through [composer](https://getcomposer.org/doc/00-intro.md):
+[composer](https://getcomposer.org/doc/00-intro.md) aracılığıyla yükleyin:
 
 ```
 composer require picqer/php-barcode-generator
 ```
 
-If you want to generate PNG or JPG images, you need the GD library or Imagick installed on your system as well. For SVG or HTML renders, there are no dependencies.
+PNG veya JPG görüntüleri oluşturmak istiyorsanız, sisteminizde GD kütüphanesi veya Imagick'in de yüklü olması gerekir. SVG veya HTML render'ları için herhangi bir bağımlılık yoktur.
 
-## Usage
-You want a barcode for a specific "type" (for example Code 128 or UPC) in a specific image format (for example PNG or SVG).
+## Kullanım
+Belirli bir "tür" (örneğin Kod 128 veya UPC) için belirli bir görüntü biçiminde (örneğin PNG veya SVG) bir barkod istiyorsunuz.
 
-- First, encode the string you want the barcode of into a `Barcode` object with one of the barcode types.
-- Then, use one of the renderers to render the image of the bars in the `Barcode` object.
+- İlk olarak, barkodunu istediğiniz dizeyi barkod türlerinden biriyle `Barkod` nesnesine kodlayın.
+- Ardından, `Barkod` nesnesindeki çubukların görüntüsünü oluşturmak için işleyicilerden birini kullanın.
 
-> The "type" is a standard that defines which characters you can encode and which bars represent which character. The most used types are [code 128](https://en.wikipedia.org/wiki/Code_128) and [EAN/UPC](https://en.wikipedia.org/wiki/International_Article_Number). Not all characters can be encoded into each barcode type, and not all barcode scanners can read all types.
-
+> "Tür", hangi karakterleri kodlayabileceğinizi ve hangi çubukların hangi karakteri temsil ettiğini tanımlayan bir standarttır. En çok kullanılan türler [kod 128](https://en.wikipedia.org/wiki/Code_128) ve [EAN/UPC](https://en.wikipedia.org/wiki/International_Article_Number)'dır. Her karakter her barkod türüne kodlanamaz ve tüm barkod tarayıcıları tüm türleri okuyamaz.
 ```php
 <?php
 require 'vendor/autoload.php';
