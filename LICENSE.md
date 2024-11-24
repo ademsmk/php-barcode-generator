@@ -1,165 +1,76 @@
                    GNU LESSER GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+                   Version 3, 29 June 2007
+Telif Hakkı (C) 2007 Free Software Foundation, Inc. http://fsf.org/ Bu lisans belgesinin birebir kopyalarının kopyalanması ve dağıtılması herkese serbesttir, ancak değiştirilmesine izin verilmez.
 
- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+GNU Küçük Genel Kamu Lisansı'nın bu sürümü, aşağıda listelenen ek izinlerle desteklenen GNU Genel Kamu Lisansı'nın 3. sürümünün hüküm ve koşullarını içermektedir.
 
+Ek Tanımlar.
+İşbu belgede kullanıldığı şekliyle, "bu Lisans", GNU Küçük Genel Kamu Lisansı'nın 3. sürümünü ifade eder ve "GNU GPL", GNU Genel Kamu Lisansı'nın 3. sürümünü ifade eder.
 
-  This version of the GNU Lesser General Public License incorporates
-the terms and conditions of version 3 of the GNU General Public
-License, supplemented by the additional permissions listed below.
+"Kütüphane", aşağıda tanımlandığı gibi bir Uygulama veya Birleşik Eser dışında, bu Lisans tarafından yönetilen kapsanan bir eseri ifade eder.
 
-  0. Additional Definitions.
+"Uygulama", Kütüphane tarafından sağlanan bir arayüzü kullanan, ancak başka bir şekilde Kütüphaneye dayanmayan herhangi bir çalışmadır. Kütüphane tarafından tanımlanan bir sınıfın alt sınıfını tanımlamak, Kütüphane tarafından sağlanan bir arayüzü kullanmanın bir yolu olarak kabul edilir.
 
-  As used herein, "this License" refers to version 3 of the GNU Lesser
-General Public License, and the "GNU GPL" refers to version 3 of the GNU
-General Public License.
+"Birleşik Eser", bir Uygulamanın Kütüphane ile birleştirilmesi veya bağlanmasıyla üretilen bir eserdir. Birleşik Eserin yapıldığı Kütüphanenin belirli sürümüne "Bağlantılı Sürüm" de denir.
 
-  "The Library" refers to a covered work governed by this License,
-other than an Application or a Combined Work as defined below.
+Birleşik Eser için "Asgari Karşılık Gelen Kaynak", Birleşik Eserin, Uygulamaya dayalı olan ve Bağlantılı Sürüme dayanmayan, ayrı ayrı ele alındığında Birleşik Eserin bölümleri için kaynak kodları hariç, Birleşik Eser için Karşılık Gelen Kaynak anlamına gelir.
 
-  An "Application" is any work that makes use of an interface provided
-by the Library, but which is not otherwise based on the Library.
-Defining a subclass of a class defined by the Library is deemed a mode
-of using an interface provided by the Library.
+Birleşik Eser için "Karşılık Gelen Uygulama Kodu", Birleşik Eserin Uygulamadan yeniden üretilmesi için gereken tüm veriler ve yardımcı programlar dahil olmak üzere Uygulama için nesne kodu ve/veya kaynak kodu anlamına gelir, ancak Birleşik Eserin Sistem Kitaplıkları hariçtir.
 
-  A "Combined Work" is a work produced by combining or linking an
-Application with the Library.  The particular version of the Library
-with which the Combined Work was made is also called the "Linked
-Version".
+GNU GPL'nin 3. Bölümüne İlişkin İstisna.
+Bu Lisansın 3. ve 4. bölümleri uyarınca kapsanan bir eseri, GNU GPL'nin 3. bölümüyle bağlı olmaksızın iletebilirsiniz.
 
-  The "Minimal Corresponding Source" for a Combined Work means the
-Corresponding Source for the Combined Work, excluding any source code
-for portions of the Combined Work that, considered in isolation, are
-based on the Application, and not on the Linked Version.
+Değiştirilmiş Versiyonların İletimi.
+Kütüphanenin bir kopyasını değiştirirseniz ve değişikliklerinizde bir tesis, tesisi kullanan bir Uygulama tarafından sağlanacak bir işlevi veya veriyi ifade eder (tesis çağrıldığında geçirilen bir argüman dışında), o zaman değiştirilmiş sürümün bir kopyasını iletebilirsiniz:
 
-  The "Corresponding Application Code" for a Combined Work means the
-object code and/or source code for the Application, including any data
-and utility programs needed for reproducing the Combined Work from the
-Application, but excluding the System Libraries of the Combined Work.
+a) bu Lisans kapsamında, bir Uygulamanın işlevi veya verileri sağlamaması durumunda tesisin çalışmaya devam etmesini ve amacının anlamlı kalan herhangi bir kısmını yerine getirmesini sağlamak için iyi niyetli bir çaba göstermeniz koşuluyla, veya
 
-  1. Exception to Section 3 of the GNU GPL.
+b) GNU GPL altında, bu Lisansın ek izinlerinden hiçbiri söz konusu kopyaya uygulanamaz.
 
-  You may convey a covered work under sections 3 and 4 of this License
-without being bound by section 3 of the GNU GPL.
+Kütüphane Başlık Dosyalarından Malzemeyi İçeren Nesne Kodu.
+Bir Uygulamanın nesne kodu biçimi, Kütüphanenin bir parçası olan bir başlık dosyasından materyal içerebilir. Bu tür nesne kodunu, seçtiğiniz şartlar altında iletebilirsiniz; ancak, dahil edilen materyal sayısal parametreler, veri yapısı düzenleri ve erişim araçları veya küçük makrolar, satır içi işlevler ve şablonlarla (on veya daha az satır uzunluğunda) sınırlı değilse, aşağıdakilerin her ikisini de yaparsınız:
 
-  2. Conveying Modified Versions.
+a) Nesne kodunun her kopyasında, Kütüphanenin bu kopyada kullanıldığına ve Kütüphanenin ve kullanımının bu Lisans kapsamında olduğuna dair belirgin bir bildirimde bulunun.
 
-  If you modify a copy of the Library, and, in your modifications, a
-facility refers to a function or data to be supplied by an Application
-that uses the facility (other than as an argument passed when the
-facility is invoked), then you may convey a copy of the modified
-version:
+b) Nesne kodunu GNU GPL'nin bir kopyası ve bu lisans belgesiyle birlikte gönderin.
 
-   a) under this License, provided that you make a good faith effort to
-   ensure that, in the event an Application does not supply the
-   function or data, the facility still operates, and performs
-   whatever part of its purpose remains meaningful, or
+Kombine İşler.
+Birleşik Eser'i, Birleşik Eser'de bulunan Kitaplık bölümlerinin değiştirilmesini ve bu değişikliklerin hata ayıklaması için tersine mühendislik yapılmasını etkin bir şekilde kısıtlamayan, seçtiğiniz şartlar altında, aşağıdakilerin her birini de yaparsanız, iletebilirsiniz:
 
-   b) under the GNU GPL, with none of the additional permissions of
-   this License applicable to that copy.
+a) Birleşik Eserin her kopyasına, Kütüphanenin bu eserde kullanıldığına ve Kütüphanenin ve kullanımının bu Lisans kapsamında olduğuna dair belirgin bir bildirimde bulunun.
 
-  3. Object Code Incorporating Material from Library Header Files.
+b) Birleşik Çalışmaya GNU GPL'nin bir kopyasını ve bu lisans belgesini ekleyin.
 
-  The object code form of an Application may incorporate material from
-a header file that is part of the Library.  You may convey such object
-code under terms of your choice, provided that, if the incorporated
-material is not limited to numerical parameters, data structure
-layouts and accessors, or small macros, inline functions and templates
-(ten or fewer lines in length), you do both of the following:
+c) Yürütme sırasında telif hakkı bildirimleri görüntüleyen Birleşik Eserler için, bu bildirimler arasına Kütüphanenin telif hakkı bildirimini ve kullanıcıyı GNU GPL kopyalarına ve bu lisans belgesine yönlendiren bir referansı ekleyin.
 
-   a) Give prominent notice with each copy of the object code that the
-   Library is used in it and that the Library and its use are
-   covered by this License.
+d) Aşağıdakilerden birini yapın:
 
-   b) Accompany the object code with a copy of the GNU GPL and this license
-   document.
+   0) Convey the Minimal Corresponding Source under the terms of this
+   License, and the Corresponding Application Code in a form
+   suitable for, and under terms that permit, the user to
+   recombine or relink the Application with a modified version of
+   the Linked Version to produce a modified Combined Work, in the
+   manner specified by section 6 of the GNU GPL for conveying
+   Corresponding Source.
 
-  4. Combined Works.
+   1) Use a suitable shared library mechanism for linking with the
+   Library.  A suitable mechanism is one that (a) uses at run time
+   a copy of the Library already present on the user's computer
+   system, and (b) will operate properly with a modified version
+   of the Library that is interface-compatible with the Linked
+   Version.
+e) Kurulum Bilgilerini sağlayın, ancak yalnızca GNU GPL'nin 6. bölümü uyarınca bu bilgileri sağlamanız gerekiyorsa ve yalnızca Bağlantılı Sürümün değiştirilmiş bir sürümüyle Uygulamayı yeniden birleştirerek veya yeniden bağlayarak üretilen Birleşik Çalışmanın değiştirilmiş bir sürümünü yüklemek ve yürütmek için bu bilgilerin gerekli olduğu ölçüde. (4d0 seçeneğini kullanırsanız, Kurulum Bilgileri, Minimum İlgili Kaynak ve İlgili Uygulama Koduna eşlik etmelidir. 4d1 seçeneğini kullanırsanız, Kurulum Bilgilerini, İlgili Kaynağı iletmek için GNU GPL'nin 6. bölümünde belirtilen şekilde sağlamalısınız.)
 
-  You may convey a Combined Work under terms of your choice that,
-taken together, effectively do not restrict modification of the
-portions of the Library contained in the Combined Work and reverse
-engineering for debugging such modifications, if you also do each of
-the following:
+Birleşik Kütüphaneler.
+Aşağıdakilerin her ikisini de yaparsanız, Kütüphaneye dayalı bir eser olan kütüphane tesislerini, Uygulamalar olmayan ve bu Lisans tarafından kapsanmayan diğer kütüphane tesisleriyle birlikte tek bir kütüphanede yan yana yerleştirebilir ve böyle bir birleşik kütüphaneyi kendi seçtiğiniz koşullar altında iletebilirsiniz:
 
-   a) Give prominent notice with each copy of the Combined Work that
-   the Library is used in it and that the Library and its use are
-   covered by this License.
+a) Birleşik kütüphaneye, bu Lisansın şartları uyarınca iletilen, Kütüphaneye dayalı aynı eserin, herhangi bir başka kütüphane olanağıyla birleştirilmemiş bir kopyasını ekleyin.
 
-   b) Accompany the Combined Work with a copy of the GNU GPL and this license
-   document.
+b) Birleşik kütüphaneye, bir kısmının Kütüphaneye dayalı bir eser olduğunu ve aynı eserin birleştirilmemiş biçiminin nerede bulunabileceğini açıklayan belirgin bir bildirimde bulunun.
 
-   c) For a Combined Work that displays copyright notices during
-   execution, include the copyright notice for the Library among
-   these notices, as well as a reference directing the user to the
-   copies of the GNU GPL and this license document.
+GNU Genel Kamu Lisansının Gözden Geçirilmiş Sürümleri.
+Özgür Yazılım Vakfı zaman zaman GNU Lesser General Public License'ın gözden geçirilmiş ve/veya yeni sürümlerini yayınlayabilir. Bu tür yeni sürümler, mevcut sürüme benzer bir ruha sahip olacak ancak yeni sorunları veya endişeleri ele almak için ayrıntılarda farklılık gösterebilir.
 
-   d) Do one of the following:
+Her sürüme ayırt edici bir sürüm numarası verilir. Aldığınız haliyle Kütüphane, GNU Lesser General Public License'ın belirli bir numaralı sürümünün "veya herhangi bir sonraki sürümünün" kendisine uygulandığını belirtiyorsa, bu yayınlanmış sürümün veya Free Software Foundation tarafından yayınlanmış herhangi bir sonraki sürümün hüküm ve koşullarını takip etme seçeneğiniz vardır. Aldığınız haliyle Kütüphane, GNU Lesser General Public License'ın bir sürüm numarasını belirtmiyorsa, Free Software Foundation tarafından yayınlanmış herhangi bir GNU Lesser General Public License sürümünü seçebilirsiniz.
 
-       0) Convey the Minimal Corresponding Source under the terms of this
-       License, and the Corresponding Application Code in a form
-       suitable for, and under terms that permit, the user to
-       recombine or relink the Application with a modified version of
-       the Linked Version to produce a modified Combined Work, in the
-       manner specified by section 6 of the GNU GPL for conveying
-       Corresponding Source.
-
-       1) Use a suitable shared library mechanism for linking with the
-       Library.  A suitable mechanism is one that (a) uses at run time
-       a copy of the Library already present on the user's computer
-       system, and (b) will operate properly with a modified version
-       of the Library that is interface-compatible with the Linked
-       Version.
-
-   e) Provide Installation Information, but only if you would otherwise
-   be required to provide such information under section 6 of the
-   GNU GPL, and only to the extent that such information is
-   necessary to install and execute a modified version of the
-   Combined Work produced by recombining or relinking the
-   Application with a modified version of the Linked Version. (If
-   you use option 4d0, the Installation Information must accompany
-   the Minimal Corresponding Source and Corresponding Application
-   Code. If you use option 4d1, you must provide the Installation
-   Information in the manner specified by section 6 of the GNU GPL
-   for conveying Corresponding Source.)
-
-  5. Combined Libraries.
-
-  You may place library facilities that are a work based on the
-Library side by side in a single library together with other library
-facilities that are not Applications and are not covered by this
-License, and convey such a combined library under terms of your
-choice, if you do both of the following:
-
-   a) Accompany the combined library with a copy of the same work based
-   on the Library, uncombined with any other library facilities,
-   conveyed under the terms of this License.
-
-   b) Give prominent notice with the combined library that part of it
-   is a work based on the Library, and explaining where to find the
-   accompanying uncombined form of the same work.
-
-  6. Revised Versions of the GNU Lesser General Public License.
-
-  The Free Software Foundation may publish revised and/or new versions
-of the GNU Lesser General Public License from time to time. Such new
-versions will be similar in spirit to the present version, but may
-differ in detail to address new problems or concerns.
-
-  Each version is given a distinguishing version number. If the
-Library as you received it specifies that a certain numbered version
-of the GNU Lesser General Public License "or any later version"
-applies to it, you have the option of following the terms and
-conditions either of that published version or of any later version
-published by the Free Software Foundation. If the Library as you
-received it does not specify a version number of the GNU Lesser
-General Public License, you may choose any version of the GNU Lesser
-General Public License ever published by the Free Software Foundation.
-
-  If the Library as you received it specifies that a proxy can decide
-whether future versions of the GNU Lesser General Public License shall
-apply, that proxy's public statement of acceptance of any version is
-permanent authorization for you to choose that version for the
-Library.
+Aldığınız Kütüphane, GNU Genel Kamu Lisansı'nın gelecekteki sürümlerinin uygulanıp uygulanmayacağına bir vekilin karar verebileceğini belirtiyorsa, söz konusu vekilin herhangi bir sürümü kabul ettiğine dair kamuya açık beyanı, Kütüphane için o sürümü seçmeniz için size kalıcı bir yetkilendirme niteliğindedir.
