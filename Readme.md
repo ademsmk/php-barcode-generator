@@ -1,5 +1,5 @@
 # PHP Barkod Oluşturucu
-<a href="https://github.com/picqer/php-barkod-oluşturucu/actions"><img src="https://github.com/picqer/php-barkod-oluşturucu/workflows/phpunit/badge.svg" alt="Derleme Durumu"></a>
+
 <a href="https://packagist.org/packages/picqer/php-barkod-oluşturucu"><img src="https://img.shields.io/packagist/dt/picqer/php-barkod-oluşturucu" alt="Toplam İndirmeler"></a>
 <a href="https://packagist.org/packages/picqer/php-barkod-oluşturucu"><img src="https://img.shields.io/packagist/v/picqer/php-barkod-oluşturucu" alt="En Son Kararlı Sürüm"></a>
 
