@@ -19,14 +19,13 @@ composer require picqer/php-barcode-generator
 
 PNG veya JPG görüntüleri oluşturmak istiyorsanız, sisteminizde GD kütüphanesi veya Imagick'in de yüklü olması gerekir. SVG veya HTML render'ları için herhangi bir bağımlılık yoktur.
 
-## Kullanım
-Belirli bir "tür" (örneğin Kod 128 veya UPC) için belirli bir görüntü biçiminde (örneğin PNG veya SVG) bir barkod istiyorsunuz.
+Kullanım
+belirli bir "tür" (örneğin Kod 128 veya UPC) için belirli bir görüntü bölümü (örneğin PNG veya SVG) bir barkod yönetimi.
 
-- İlk olarak, barkodunu istediğiniz dizeyi barkod türlerinden biriyle `Barkod` nesnesine kodlayın.
-- Ardından, `Barkod` nesnesindeki çubukların görüntüsünü oluşturmak için işleyicilerden birini kullanın.
+İlk olarak, barkodunu istediğiniz dizeyi barkod türlerinden yazılımların Barkodnesnelerine kodlayın.
+Ayrıca, Barkodnesnedeki çubukların düzenlemek için işleyicilerden birini kullanın.
+"Tür", hangi karakterleri kodlayabileceğinizi ve hangi çubukların hangi karakteri temsil ettiğini kanıtlayabileceğiniz bir standarttır. En çok kullanılan türler kod 128 ve EAN/UPC'dir . Her karakteri, her barkod tipi kodlanamaz ve tüm barkod tarayıcıları, tüm türleri okuyamaz.
 
-> "Tür", hangi karakterleri kodlayabileceğinizi ve hangi çubukların hangi karakteri temsil ettiğini tanımlayan bir standarttır. En çok kullanılan türler [kod 128](https://en.wikipedia.org/wiki/Code_128) ve [EAN/UPC](https://en.wikipedia.org/wiki/International_Article_Number)'dır. Her karakter her barkod türüne kodlanamaz ve tüm barkod tarayıcıları tüm türleri okuyamaz.
-```php
 <?php
 require 'vendor/autoload.php';
 
@@ -36,13 +35,11 @@ $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode('081231723897');
 // Output the barcode as HTML in the browser with a HTML Renderer
 $renderer = new Picqer\Barcode\Renderers\HtmlRenderer();
 echo $renderer->render($barcode);
-```
+Bu güzellikle sonuçlanacak:
+Barkod 081231723897, Kod 128 olarak
 
-Will result in this beauty:<br>
-![Barcode 081231723897 as Code 128](tests/verified-files/081231723897-ean13.svg)
+Her bir renderer'ın kendine özgü seçenekleri vardır. Örneğin, bir PNG'nin yüksekliğini, genişliğini ve rengini ayarlayabilirsiniz:
 
-Each renderer has their own options. For example, you can set the height, width and color of a PNG:
-```php
 <?php
 require 'vendor/autoload.php';
 
@@ -54,23 +51,21 @@ $renderer->setForegroundColor($colorRed);
 
 // Save PNG to the filesystem, with widthFactor 3 (width of the barcode x 3) and height of 50 pixels
 file_put_contents('barcode.png', $renderer->render($barcode, $barcode->getWidth() * 3, 50));
-```
+Görüntü oluşturucular
+Mevcut resim oluşturucular: SVG, PNG, JPG ve HTML.
 
-## Image renderers
-Available image renderers: SVG, PNG, JPG and HTML.
+Hepsi RendererInterface'e uygundur ve aynı render()metoda sahiptir. Bazı renderer'ların set*() metodları aracılığıyla ek seçenekleri de vardır.
 
-They all conform to the RendererInterface and have the same `render()` method. Some renderers have extra options as well, via set*() methods.
+Genişlikler
+render() metodu Barkod nesnesine, genişliğe ve yüksekliğe ihtiyaç duyar. JPG/PNG görüntüleri için , yalnızca Barkod nesnesinin genişliğinin bir faktörü olan bir genişlik verdiğinizde geçerli bir barkod elde edersiniz. Bu nedenle örnekler, $barcode->getWidth() * 2görüntüyü barkod verilerinin genişliğinden 2 kat daha geniş pikseller halinde yapmayı gösterir. Genişlik olarak keyfi bir sayı verebilirsiniz ve görüntü mümkün olan en iyi şekilde ölçeklenir, ancak kenar yumuşatma olmadan mükemmel bir şekilde geçerli olmaz.
 
-### Widths
-The render() method needs the Barcode object, the width and height. **For JPG/PNG images**, you only get a valid barcode if you give a width that is a factor of the width of the Barcode object. That is why the examples show `$barcode->getWidth() * 2` to make the image 2 times wider in pixels then the width of the barcode data. You *can* give an arbitrary number as width and the image will be scaled as best as possible, but without anti-aliasing, it will not be perfectly valid.
+HTML ve SVG görüntüleyicileri her genişlik ve yüksekliği, hatta kayan yazıları bile işleyebilir.
 
-HTML and SVG renderers can handle any width and height, even floats.
+Her bir render aracı için tüm seçenekler şunlardır:
 
-Here are all the options for each renderer:
+SVG
+Vektör tabanlı bir SVG resmi. Baskıda en iyi kaliteyi verir.
 
-### SVG
-A vector based SVG image. Gives the best quality to print.
-```php
 $renderer = new Picqer\Barcode\Renderers\SvgRenderer();
 $renderer->setForegroundColor([255, 0, 0]); // Give a color red for the bars, default is black. Give it as 3 times 0-255 values for red, green and blue. 
 $renderer->setBackgroundColor([0, 0, 255]); // Give a color blue for the background, default is transparent. Give it as 3 times 0-255 values for red, green and blue. 
@@ -78,11 +73,9 @@ $renderer->setSvgType($renderer::TYPE_SVG_INLINE); // Changes the output to be u
 $renderer->setSvgType($renderer::TYPE_SVG_STANDALONE); // If you want to force the default, create a stand alone SVG image
 
 $renderer->render($barcode, 450.20, 75); // Width and height support floats
-````
+PNG + JPG
+PNG ve JPG için tüm seçenekler aynıdır.
 
-### PNG + JPG
-All options for PNG and JPG are the same.
-```php
 $renderer = new Picqer\Barcode\Renderers\PngRenderer();
 $renderer->setForegroundColor([255, 0, 0]); // Give a color for the bars, default is black. Give it as 3 times 0-255 values for red, green and blue. 
 $renderer->setBackgroundColor([0, 255, 255]); // Give a color for the background, default is transparent (in PNG) or white (in JPG). Give it as 3 times 0-255 values for red, green and blue. 
@@ -90,107 +83,88 @@ $renderer->useGd(); // If you have Imagick and GD installed, but want to use GD
 $renderer->useImagick(); // If you have Imagick and GD installed, but want to use Imagick
 
 $renderer->render($barcode, 5, 40); // Width factor (how many pixel wide every bar is), and the height in pixels
-````
+HTML
+Tam bir HTML belgesinde satır içi kullanılacak HTML kodunu verir.
 
-### HTML
-Gives HTML to use inline in a full HTML document.
-```php
 $renderer = new Picqer\Barcode\Renderers\HtmlRenderer();
 $renderer->setForegroundColor([255, 0, 0]); // Give a color red for the bars, default is black. Give it as 3 times 0-255 values for red, green and blue. 
 $renderer->setBackgroundColor([0, 0, 255]); // Give a color blue for the background, default is transparent. Give it as 3 times 0-255 values for red, green and blue. 
 
 $renderer->render($barcode, 450.20, 75); // Width and height support floats
-````
+Dinamik HTML
+Burada barkodun tam genişliğini ve yüksekliğini kullanarak sabit boyutlu bir container/div içerisine yerleştirilmesi için HTML kodunu verin.
 
-### Dynamic HTML
-Give HTML here the barcode is using the full width and height, to put inside a container/div that has a fixed size.
-```php
 $renderer = new Picqer\Barcode\Renderers\DynamicHtmlRenderer();
 $renderer->setForegroundColor([255, 0, 0]); // Give a color red for the bars, default is black. Give it as 3 times 0-255 values for red, green and blue. 
 $renderer->setBackgroundColor([0, 0, 255]); // Give a color blue for the background, default is transparent. Give it as 3 times 0-255 values for red, green and blue. 
 
 $renderer->render($barcode);
-````
+Oluşturulan HTML'i şu şekilde bir div elemanının içine koyabilirsiniz:
 
-You can put the rendered HTML inside a div like this:
-```html
 <div style="width: 400px; height: 75px"><?php echo $renderedBarcode; ?></div>
-```
+Kabul edilen barkod türleri
+Bu barkod türleri desteklenir. Tüm türler farklı karakter setlerini destekler ve bazılarının zorunlu uzunlukları vardır. Lütfen desteklenen karakterler ve tür başına uzunluklar için Wikipedia'ya bakın.
 
-## Accepted barcode types
-These barcode types are supported. All types support different character sets and some have mandatory lengths. Please see wikipedia for supported chars and lengths per type.
+Desteklenen tüm türleri src/Types klasöründe bulabilirsiniz .
 
-You can find all supported types in the [src/Types](src/Types) folder.
+En çok kullanılan tipler TYPE_CODE_128 ve TYPE_CODE_39'dur. En iyi tarayıcı desteği, değişken uzunluk ve desteklenen en fazla karakter nedeniyle.
 
-Most used types are TYPE_CODE_128 and TYPE_CODE_39. Because of the best scanner support, variable length and most chars supported.
+TYPE_CODE_32 (İtalyan ilaç kodu 'MINSAN')
+TÜR_KODU_39
+TÜR_KODU_39_KONTROL_TOPLAMI
+TÜR_KODU_39E
+TÜR_KODU_39E_KONTROL_TOPLAMI
+TÜR_KODU_93
+TÜR_STANDART_2_5
+TÜR_STANDART_2_5_KONTROL_TOPLAMI
+TÜR_ARALIKLI_2_5
+TÜR_ARALIKLI_2_5_KONTROL_TOPLAMI
+TÜR_KODU_128
+TÜR_KODU_128_A
+TÜR_KODU_128_B
+TÜR_KODU_128_C
+TÜR_EAN_2
+TÜR_EAN_5
+TÜR_EAN_8
+TÜR_EAN_13
+TYPE_ITF14 (GTIN-14 olarak da bilinir)
+TÜR_UPC_A
+TÜR_UPC_E
+TÜR_MSI
+TÜR_MSI_KONTROL_TUTAM
+TÜR_POSTNET
+TÜR_GEZEGEN
+TÜR_RMS4CC
+TÜR_KIX
+TÜR_IMB
+TÜR_KODABAR
+TÜR_KODU_11
+TÜR_İLAÇ_KODU
+TÜR_İLAÇ_KODU_İKİ_PARÇA
+Desteklenen tüm barkod türleri için örnek görsellere bakın
 
-- TYPE_CODE_32 (italian pharmaceutical code 'MINSAN')
-- TYPE_CODE_39
-- TYPE_CODE_39_CHECKSUM
-- TYPE_CODE_39E
-- TYPE_CODE_39E_CHECKSUM
-- TYPE_CODE_93
-- TYPE_STANDARD_2_5
-- TYPE_STANDARD_2_5_CHECKSUM
-- TYPE_INTERLEAVED_2_5
-- TYPE_INTERLEAVED_2_5_CHECKSUM
-- TYPE_CODE_128
-- TYPE_CODE_128_A
-- TYPE_CODE_128_B
-- TYPE_CODE_128_C
-- TYPE_EAN_2
-- TYPE_EAN_5
-- TYPE_EAN_8
-- TYPE_EAN_13
-- TYPE_ITF14 (Also known as GTIN-14)
-- TYPE_UPC_A
-- TYPE_UPC_E
-- TYPE_MSI
-- TYPE_MSI_CHECKSUM
-- TYPE_POSTNET
-- TYPE_PLANET
-- TYPE_RMS4CC
-- TYPE_KIX
-- TYPE_IMB
-- TYPE_CODABAR
-- TYPE_CODE_11
-- TYPE_PHARMA_CODE
-- TYPE_PHARMA_CODE_TWO_TRACKS
+PNG ve JPG görselleri hakkında bir not
+PNG veya JPG resimleri kullanmak istiyorsanız, Imagick veya GD kütüphanesini yüklemeniz gerekir . Bu paket, yüklüyse Imagick'i kullanır veya GD'ye geri döner. Her ikisini de yüklediyseniz ancak belirli bir yöntem istiyorsanız, tercihinizi zorlamak için $renderer->useGd()veya kullanabilirsiniz.$renderer->useImagick()
 
-[See example images for all supported barcode types](examples.md)
-
-## A note about PNG and JPG images
-If you want to use PNG or JPG images, you need to install [Imagick](https://www.php.net/manual/en/intro.imagick.php) or the [GD library](https://www.php.net/manual/en/intro.image.php). This package will use Imagick if that is installed, or fall back to GD. If you have both installed, but you want a specific method, you can use `$renderer->useGd()` or `$renderer->useImagick()` to force your preference.
-
-## Examples
-
-### Embedded PNG image in HTML
-```php
+Örnekler
+HTML'de gömülü PNG resmi
 $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode('081231723897');
 $renderer = new Picqer\Barcode\Renderers\PngRenderer();
 echo '<img src="data:image/png;base64,' . base64_encode($renderer->render($barcode, $barcode->getWidth() * 2)) . '">';
-```
-
-### Save JPG barcode to disk
-```php
+JPG barkodunu diske kaydet
 $barcode = (new Picqer\Barcode\Types\TypeCodabar())->getBarcode('081231723897');
 $renderer = new Picqer\Barcode\Renderers\JpgRenderer();
 
 file_put_contents('barcode.jpg', $renderer->render($barcode, $barcode->getWidth() * 2));
-```
-
-### Oneliner SVG output to disk
-```php
+Tek satırlık SVG çıktısını diske aktarma
 file_put_contents('barcode.svg', (new Picqer\Barcode\Renderers\SvgRenderer())->render((new Picqer\Barcode\Types\TypeKix())->getBarcode('6825ME601')));
-```
+v3'e yükseltme
+v2'den v3'e yükseltme yaparken hiçbir şeyi değiştirmenize gerek yok. Yukarıda bu kütüphaneyi v3'ten beri kullanmanın yeni tercih edilen yolunu bulabilirsiniz. Ancak eski stil hala işe yarıyor.
 
-## Upgrading to v3
-There is no need to change anything when upgrading from v2 to v3. Above you find the new preferred way of using this library since v3. But the old style still works.
+Renderer'lara aynı arayüzü vermek için, renkleri ayarlamak artık her zaman bir RGB renk dizisiyle yapılır. Eski BarcodeGenerator* sınıflarını kullanırsanız ve adları ('kırmızı') veya hex kodları (#3399ef) olan renkler kullanırsanız, bunlar ColorHelper kullanılarak dönüştürülecektir. Tüm hex kodları desteklenir, ancak renk adları için yalnızca temel renkler desteklenir.
 
-To give the renderers the same interface, setting colors is now always with an array of RGB colors. If you use the old BarcodeGenerator* classes and use colors with names ('red') or hex codes (#3399ef), these will be converted using the ColorHelper. All hexcodes are supported, but for names of colors only the basic colors are supported.
+Yeni stile geçmek istiyorsanız, işte bir örnek:
 
-If you want to convert to the new style, here is an example:
-```php
 // Old style
 $generator = new Picqer\Barcode\BarcodeGeneratorSVG();
 echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
@@ -199,10 +173,8 @@ echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
 $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode('081231723897');
 $renderer = new Picqer\Barcode\Renderers\SvgRenderer();
 echo $renderer->render($barcode);
-```
+Oluşturucudaki genişlik artık widthFactor yerine nihai sonucun genişliğidir. Dinamik genişlikleri korumak istiyorsanız, kodlanmış Barkodun genişliğini alabilir ve onu widthFactor ile çarparak daha öncekiyle aynı sonucu elde edebilirsiniz. Burada widthFactor'ın 2'ye eşit olduğu bir örneğe bakın:
 
-The width in the renderer is now the width of the end result, instead of the widthFactor. If you want to keep dynamic widths, you can get the width of the encoded Barcode and multiply it by the widthFactor to get the same result as before. See here an example for a widthFactor of 2:
-```php
 // Old style
 $generator = new Picqer\Barcode\BarcodeGeneratorSVG();
 echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128, 2. 30);
@@ -211,38 +183,30 @@ echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128, 2. 30);
 $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode('081231723897');
 $renderer = new Picqer\Barcode\Renderers\SvgRenderer();
 echo $renderer->render($barcode, $barcode->getWidth() * 2, 30);
-```
+Önceki stil jeneratörleri
+Sürüm 3'te barkod tipi kodlayıcılar ve görüntü işleyiciler tamamen ayrıdır. Bu, kendi işleyicinizi oluşturmayı çok daha kolay hale getirir. Eski yöntem "üreticiler" kullanmaktı. Aşağıda, v3'te de hala çalışan bu üreteçlerin eski örnekleri bulunmaktadır.
 
----
+Kullanım
+İstediğiniz çıktı için barkod üretecini başlatın, sonra ->getBarcode() rutinini istediğiniz kadar çağırın.
 
-## Previous style generators
-In version 3 the barcode type encoders and image renderers are completely separate. This makes building your own renderer way easier. The old way was using "generators". Below are the old examples of these generators, which still works in v3 as well.
-
-### Usage
-Initiate the barcode generator for the output you want, then call the ->getBarcode() routine as many times as you want.
-
-```php
 <?php
 require 'vendor/autoload.php';
 
 // This will output the barcode as HTML output to display in the browser
 $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
 echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
-```
+Bu güzellikle sonuçlanacak:
+Barkod 081231723897, Kod 128 olarak
 
-Will result in this beauty:<br>
-![Barcode 081231723897 as Code 128](tests/verified-files/081231723897-ean13.svg)
+Yöntem getBarcode()aşağıdaki parametreleri kabul eder:
 
-The `getBarcode()` method accepts the following parameters:
-- `$barcode` String needed to encode in the barcode
-- `$type` Type of barcode, use the constants defined in the class
-- `$widthFactor` Width is based on the length of the data, with this factor you can make the barcode bars wider than default
-- `$height` The total height of the barcode in pixels
-- `$foregroundColor` Hex code as string, or array of RGB, of the colors of the bars (the foreground color)
+$barcodeBarkodda kodlanması gereken dize
+$typeBarkod türü, sınıfta tanımlanan sabitleri kullanın
+$widthFactorGenişlik, verilerin uzunluğuna bağlıdır; bu faktörle barkod çubuklarını varsayılandan daha geniş yapabilirsiniz
+$heightBarkodun toplam yüksekliği piksel cinsinden
+$foregroundColorÇubukların renklerinin (ön plan rengi) RGB dizisi veya dizesi olarak onaltılık kod
+Tüm parametrelerin kullanımına örnek:
 
-Example of usage of all parameters:
-
-```php
 <?php
 
 require 'vendor/autoload.php';
@@ -251,33 +215,17 @@ $redColor = [255, 0, 0];
 
 $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
 file_put_contents('barcode.png', $generator->getBarcode('081231723897', $generator::TYPE_CODE_128, 3, 50, $redColor));
-```
-
-### Image types
-```php
+Görüntü türleri
 $generatorSVG = new Picqer\Barcode\BarcodeGeneratorSVG(); // Vector based SVG
 $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG(); // Pixel based PNG
 $generatorJPG = new Picqer\Barcode\BarcodeGeneratorJPG(); // Pixel based JPG
 $generatorHTML = new Picqer\Barcode\BarcodeGeneratorHTML(); // Pixel based HTML
 $generatorHTML = new Picqer\Barcode\BarcodeGeneratorDynamicHTML(); // Vector based HTML
-```
-
-#### Embedded PNG image in HTML
-```php
+HTML'de gömülü PNG resmi
 $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
 echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128)) . '">';
-```
-
-#### Save JPG barcode to disk
-```php
+JPG barkodunu diske kaydet
 $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
 file_put_contents('barcode.jpg', $generator->getBarcode('081231723897', $generator::TYPE_CODABAR));
-```
-
-#### Oneliner SVG output to disk
-```php
+Tek satırlık SVG çıktısını diske aktarma
 file_put_contents('barcode.svg', (new Picqer\Barcode\BarcodeGeneratorSVG())->getBarcode('6825ME601', Picqer\Barcode\BarcodeGeneratorSVG::TYPE_KIX));
-```
-
----
-*The codebase is based on the [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) by Nicola Asuni. This code is therefor licensed under LGPLv3.*
